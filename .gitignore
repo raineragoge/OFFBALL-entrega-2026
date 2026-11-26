@@ -1,0 +1,21 @@
+# Entornos, dependencias y secretos
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/node_modules/
+**/dist/
+**/.env
+**/.env.*
+!**/.env.example
+*.sqlite*
+*.db
+*.joblib
+*.pkl
+*.parquet
+*.log
+mlruns/
+# Recursos reservados
+/entrega_local/
+/OFFBALL_API/assets/*
+!/OFFBALL_API/assets/README.md
+/OFFBALL_FRONTEND/docs/capturas/
