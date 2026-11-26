@@ -1,0 +1,84 @@
+{
+  "version": "GENERAL_V1",
+  "modelos": {
+    "general": "G02_general_log",
+    "economico": "G02_general_log"
+  },
+  "features": [
+    "age",
+    "partidos",
+    "minutos",
+    "goles_por90",
+    "asistencias_por90",
+    "position",
+    "sub_position",
+    "competition_id"
+  ],
+  "numericas": [
+    "age",
+    "partidos",
+    "minutos",
+    "goles_por90",
+    "asistencias_por90"
+  ],
+  "categoricas": [
+    "position",
+    "sub_position",
+    "competition_id"
+  ],
+  "categorias_entrenamiento": {
+    "position": [
+      "Attack",
+      "Defender",
+      "Goalkeeper",
+      "Midfield"
+    ],
+    "sub_position": [
+      "Attacking Midfield",
+      "Central Midfield",
+      "Centre-Back",
+      "Centre-Forward",
+      "Defensive Midfield",
+      "Goalkeeper",
+      "Left Midfield",
+      "Left Winger",
+      "Left-Back",
+      "Right Midfield",
+      "Right Winger",
+      "Right-Back",
+      "Second Striker"
+    ],
+    "competition_id": [
+      "BE1",
+      "DK1",
+      "ES1",
+      "FR1",
+      "GB1",
+      "GR1",
+      "IT1",
+      "L1",
+      "NL1",
+      "PO1",
+      "RU1",
+      "SC1",
+      "TR1",
+      "UKR1"
+    ]
+  },
+  "min_minutos": 450,
+  "max_dias_stats": 365,
+  "max_dias_valoracion_corte": 180,
+  "corte_datos": "2026-06-12",
+  "sklearn": "1.6.1",
+  "seed": 42,
+  "train_hasta": 2023,
+  "test_desde": 2024,
+  "rango_valor_eur": [
+    0,
+    1000000,
+    5000000
+  ],
+  "percentil": 95,
+  "n_test": 23658,
+  "n_candidatos": 0
+}

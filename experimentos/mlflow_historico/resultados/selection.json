@@ -1,0 +1,9 @@
+{
+  "winner": "hgb_base_8",
+  "selection": "Menor MAE EUR validaci\u00f3n 2024/25",
+  "gmm_k": 12,
+  "kmeans_k": 3,
+  "gmm_stability_ARI": 0.4659114134082138,
+  "gmm_search_boundary": true,
+  "test_used_for_selection": false
+}

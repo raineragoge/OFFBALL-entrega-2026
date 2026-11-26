@@ -1,0 +1,8 @@
+comprobacion,original,despues,introducidos
+Duplicados de appearance_id,0,9472,9472
+Minutos negativos,0,9472,9472
+Alturas ausentes (no ensuciadas),4365,4365,0
+Alturas 999 cm,0,502,502
+Valores de mercado ausentes,0,6564,6564
+Valores de mercado negativos,0,3282,3282
+Fechas inválidas en games.csv,0,890,890

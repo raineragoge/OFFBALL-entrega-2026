@@ -1,0 +1,15 @@
+# Ejemplo: colocar en OFFBALL_MASTER/ junto a OFFBALL_API/ y OFFBALL_FRONTEND/.
+# Ajusta el servicio "api" a como ya arrancas el backend (no se modifica su código).
+services:
+  api:
+    build: ./OFFBALL_API
+    # El frontend accede por proxy interno; no es necesario publicar 8000 al exterior.
+    expose: ["8000"]
+    environment:
+      OFFBALL_ORIGINS: http://localhost:5173
+  frontend:
+    build: ./OFFBALL_FRONTEND
+    ports: ["5173:80"]
+    environment:
+      OFFBALL_API_UPSTREAM: http://api:8000
+    depends_on: [api]

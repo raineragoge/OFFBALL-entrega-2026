@@ -1,0 +1,19 @@
+import type {MarketRow} from '../api/market'
+import {formations} from './formations'
+import {POSITIONS,SUBPOS_CONTRACT} from './positions'
+import type {ClubPlayer,Squad} from './squad'
+import {marketKey} from './shortlist'
+const subs=POSITIONS.flatMap(p=>SUBPOS_CONTRACT[p]);
+export function playerFromMarket(r:MarketRow,now=new Date().toISOString()):ClubPlayer{const complete=typeof r.goles==='number'&&typeof r.asistencias==='number';return {id:'market:'+marketKey(r),name:r.name??String(r.player_id),sub:r.sub_position,minutes:complete?r.minutos:0,goals:complete?r.goles!:0,assists:complete?r.asistencias!:0,rating:null,updated:now}}
+export function mergeClub(s:Squad,players:ClubPlayer[],replace=false):Squad{const map=new Map(s.players.map(p=>[p.id,p]));for(const p of players)if(replace||!map.has(p.id))map.set(p.id,p);const lineup={...s.lineups[s.formation]};for(const p of players){if(Object.values(lineup).includes(p.id))continue;const slot=formations[s.formation]?.find(x=>x.sub===p.sub&&!lineup[x.id]);if(slot)lineup[slot.id]=p.id}return {...s,players:[...map.values()],lineups:{...s.lineups,[s.formation]:lineup}}}
+export function parseSquad(text:string,now=new Date().toISOString()):ClubPlayer[]{const data:unknown=JSON.parse(text);if(!Array.isArray(data)||!data.length||data.length>500)throw new Error('Se espera una lista JSON de 1 a 500 jugadores.');const ids=new Set<string>();return data.map((p,i)=>{const fail=()=>{throw new Error(`Jugador ${i+1}: ID, nombre, puesto o estadísticas no válidos o duplicados.`)};if(!p||typeof p!=='object'||typeof p.id!=='string'||!p.id.trim()||ids.has(p.id)||typeof p.name!=='string'||!p.name.trim()||!subs.includes(p.sub)||![p.minutes,p.goals,p.assists].every(n=>Number.isInteger(n)&&n>=0&&n<=10000)||p.rating!==null&&!(typeof p.rating==='number'&&Number.isFinite(p.rating)&&p.rating>=0&&p.rating<=10))return fail();ids.add(p.id);return {id:p.id,name:p.name.trim(),sub:p.sub,minutes:p.minutes,goals:p.goals,assists:p.assists,rating:p.rating,updated:now}})}
+export const DEMO_CLUB=formations['4-2-3-1']!.map((s,i)=>({id:'demo-'+s.id,name:['Adrián','Daniel','Héctor','Raúl','Mario','Álvaro','Jorge','David','Marcos','Pablo','Sergio'][i]!,sub:s.sub,minutes:2200,goals:s.id==='DC'?3:s.role?9:0,assists:s.id==='ED'?1:s.role?7:2,rating:['LD','ED','DC'].includes(s.id)?5.4:7.3,updated:'2026-06-01'}))
+const COLUMNS=['id','name','sub','minutes','goals','assists','rating'] as const
+export function squadCsv(players:ClubPlayer[]){const q=(v:unknown)=>'"'+String(v??'').replace(/"/g,'""')+'"';return [COLUMNS.join(','),...players.map(p=>COLUMNS.map(k=>q(p[k])).join(','))].join('\r\n')}
+export function parseSquadCsv(text:string,now=new Date().toISOString()):ClubPlayer[]{
+ const clean=text.replace(/^\uFEFF/,'');const delimiter=clean.split(/\r?\n/,1)[0]?.includes(';')?';':',';const rows:string[][]=[];let row:string[]=[],cell='',quoted=false;
+ const push=()=>{row.push(cell.trim());cell=''};const end=()=>{push();if(row.some(Boolean))rows.push(row);row=[]};
+ for(let i=0;i<clean.length;i++){const c=clean[i]!;if(c==='"'){if(quoted&&clean[i+1]==='"'){cell+='"';i++}else quoted=!quoted}else if(!quoted&&c===delimiter)push();else if(!quoted&&(c==='\n'||c==='\r')){end();if(c==='\r'&&clean[i+1]==='\n')i++}else cell+=c}
+ if(quoted)throw new Error('CSV: comillas sin cerrar.');end();const head=rows.shift();if(!head||new Set(head).size!==head.length||!COLUMNS.every(k=>head.includes(k)))throw new Error('CSV: usa las columnas de la plantilla descargable.');
+ const result=rows.map((r,i)=>{if(r.length!==head.length)throw new Error(`Fila ${i+2}: número de columnas incorrecto.`);const v=Object.fromEntries(head.map((k,j)=>[k,r[j]!]));return {id:v.id,name:v.name,sub:v.sub,minutes:v.minutes===''?null:Number(v.minutes),goals:v.goals===''?null:Number(v.goals),assists:v.assists===''?null:Number(v.assists),rating:v.rating===''?null:Number(v.rating?.replace(',','.'))}});return parseSquad(JSON.stringify(result),now)
+}

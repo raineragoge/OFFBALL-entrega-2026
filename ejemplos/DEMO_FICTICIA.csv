@@ -1,0 +1,5 @@
+player_id,name,position,sub_position,age,competition_id,partidos,minutos,goles,asistencias,market_value_in_eur,fin_temporada,valuation_date,height_in_cm,foot
+DEMO_01,Ejemplo ficticio delantero,Attack,Centre-Forward,23,ES1,30,2100,12,5,750000,2025-05-25,2025-12-12,181,right
+DEMO_02,Ejemplo ficticio extremo,Attack,Left Winger,22,ES1,28,1920,7,10,1200000,2025-05-25,2025-12-12,175,right
+DEMO_03,Ejemplo ficticio mediapunta,Midfield,Attacking Midfield,24,ES1,32,2200,6,12,2500000,2025-05-25,2025-12-12,178,left
+DEMO_04,Ejemplo ficticio extremo derecho,Attack,Right Winger,21,ES1,26,1800,9,7,1500000,2025-05-25,2025-12-12,172,left

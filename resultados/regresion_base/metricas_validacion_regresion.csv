@@ -1,0 +1,6 @@
+Modelo,Tipo,Features,MAE_MEUR,MAE_MEUR_std,RMSE_MEUR,RMSE_MEUR_std,R2,N_folds
+Random Forest sin año,rf,"age, minutos, goles_por90, asistencias_por90, position, sub_position",2.6700860894951535,0.1670728335059518,6.726145559921768,0.5354506062845152,0.4087757692973235,3
+Random Forest con año,rf,"age, minutos, goles_por90, asistencias_por90, position, sub_position, valuation_year",2.7048974847673146,0.15128704183697503,6.6418738120609335,0.5278209074863792,0.4233781739259874,3
+Ridge sin año,ridge,"age, minutos, goles_por90, asistencias_por90, position, sub_position",3.702599092571774,0.12898721513863484,7.759139845059906,0.47947818819139,0.2121518435403962,3
+Ridge con año,ridge,"age, minutos, goles_por90, asistencias_por90, position, sub_position, valuation_year",3.854573865413369,0.09143606301496536,7.765921237346468,0.46113037661900563,0.21054982071444947,3
+Dummy media,dummy,baseline media,4.152011331647973,0.15188845259698422,8.747310196403756,0.5840194838560153,-0.0006905257079940311,3

@@ -1,0 +1,10 @@
+import {marketDetailUrl} from '../../api/market'
+import {useShortlist} from '../../state/shortlist'
+import {useToast} from '../ui/toast'
+import {marketKey} from '../../domain/shortlist'
+import {eurCompact} from '../../domain/format'
+import {subLabel} from '../../domain/positions'
+import {Panel,Button} from '../ui/primitives'
+import {QuickActions} from './QuickActions'
+import {Link} from '../../router/router'
+export function Shortlist(){const list=useShortlist(),toast=useToast();return <Panel className="p-5 mb-6"><h2 className="font-display text-xl font-bold">◆ Lista de fichajes · {list.rows.length}</h2><p className="text-sm text-salvia-2 mt-2">Candidatos guardados desde el mercado, disponibles en plantilla y laboratorio. Se guardan en este navegador.</p>{!list.rows.length?<p className="mt-3 text-salvia">Todavía no hay jugadores. <Link className="text-lime underline" to="/mercado">Buscar en el mercado</Link></p>:<div className="grid gap-3 mt-4 md:grid-cols-2">{list.rows.map(r=><div className="ob-stat" key={marketKey(r)}><Link to={marketDetailUrl(r)} className="font-bold text-blanco hover:text-lime underline decoration-lime/40 underline-offset-4">{r.name??r.player_id} ↗</Link><p className="text-sm text-salvia-2">{subLabel(r.sub_position)} · {eurCompact(r.market_value_in_eur)} · {r.source}</p><QuickActions row={r}/><Button size="sm" variant="ghost" onClick={()=>{try{list.remove(r)}catch{toast('No se pudo eliminar.','warn')}}}>Quitar de lista</Button></div>)}</div>}</Panel>}

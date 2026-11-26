@@ -1,0 +1,1 @@
+Artefactos propios de los notebooks 02 y 05. No publicar datos ni modelos derivados hasta revisar permisos de redistribución. `preparar_assets.py` recupera las versiones de referencia verificando SHA-256. Los joblib solo deben cargarse si proceden de una fuente propia y de confianza.

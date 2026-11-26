@@ -1,0 +1,14 @@
+player_id,name,position,sub_position,age,competition_id,partidos,minutos,goles,asistencias,market_value_in_eur,fin_temporada,valuation_date,height_in_cm,foot
+OFFBALL_TEST_01,DEMO Leo Rivas,Goalkeeper,Goalkeeper,24,ES1,32,2880,0,0,450000,2025-05-25,2025-12-12,190,right
+OFFBALL_TEST_02,DEMO Mario Vidal,Defender,Left-Back,23,ES1,28,2250,1,6,600000,2025-05-25,2025-12-12,177,left
+OFFBALL_TEST_03,DEMO Hugo Serra,Defender,Centre-Back,25,ES1,32,2700,2,1,850000,2025-05-25,2025-12-12,188,right
+OFFBALL_TEST_04,DEMO Iván Costa,Defender,Centre-Back,22,ES1,30,2520,3,1,500000,2025-05-25,2025-12-12,185,left
+OFFBALL_TEST_05,DEMO Nico Torres,Defender,Right-Back,24,ES1,29,2340,2,7,700000,2025-05-25,2025-12-12,179,right
+OFFBALL_TEST_06,DEMO Álex Martín,Midfield,Defensive Midfield,24,ES1,31,2430,2,5,950000,2025-05-25,2025-12-12,183,right
+OFFBALL_TEST_07,DEMO Diego Lago,Midfield,Central Midfield,23,ES1,30,2400,5,8,1000000,2025-05-25,2025-12-12,180,right
+OFFBALL_TEST_08,DEMO Samuel Ruiz,Midfield,Attacking Midfield,22,ES1,29,2160,8,10,1200000,2025-05-25,2025-12-12,178,left
+OFFBALL_TEST_09,DEMO Bruno Vega,Attack,Left Winger,21,ES1,30,2250,11,9,850000,2025-05-25,2025-12-12,176,right
+OFFBALL_TEST_10,DEMO Lucas Mora,Attack,Right Winger,23,ES1,31,2520,12,8,1100000,2025-05-25,2025-12-12,175,left
+OFFBALL_TEST_11,DEMO Adrián Soler,Attack,Centre-Forward,24,ES1,32,2700,21,6,900000,2025-05-25,2025-12-12,186,right
+OFFBALL_TEST_12,DEMO Óscar Ríos,Attack,Second Striker,22,ES1,28,2100,10,8,750000,2025-05-25,2025-12-12,181,right
+OFFBALL_TEST_13,DEMO Pablo Gil,Midfield,Defensive Midfield,25,ES1,30,2520,3,4,650000,2025-05-25,2025-12-12,184,left

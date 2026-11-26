@@ -1,0 +1,2 @@
+Modelo_seleccionado,Estrategia_validacion,MAE_validacion_medio_MEUR,MAE_MEUR,RMSE_MEUR,R2,Test_desde
+Random Forest sin año,TimeSeriesSplit,2.6700860894951535,3.858500520485749,9.145899327861223,0.3932365979249145,2024

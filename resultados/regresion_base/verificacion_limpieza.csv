@@ -1,0 +1,6 @@
+archivo,filas_originales,filas_limpias,columnas_coinciden,filas_coinciden,coincidencia_exacta,diferencias_por_columna
+appearances.csv,1894350,1894350,True,True,True,{}
+clubs.csv,796,796,True,True,True,{}
+games.csv,88958,88958,True,True,True,{}
+player_valuations.csv,656301,656301,True,True,True,{}
+players.csv,50149,50149,True,True,True,{}

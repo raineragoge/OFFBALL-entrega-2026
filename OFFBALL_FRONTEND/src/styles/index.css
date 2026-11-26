@@ -1,0 +1,381 @@
+@import 'tailwindcss';
+
+/*
+ * OFFBALL · Design System v2 (rediseño UX/UI, noviembre 2026)
+ * ------------------------------------------------------------
+ * Identidad (guía visual v1.x): Verde noche, Blanco, Verde salvia.
+ * Colores de datos con significado FIJO (nunca en el logotipo):
+ *   lime     → señal / estimación G02 / mejor zona / valor positivo
+ *   blue     → referencia G01 / segundo elemento comparado
+ *   gold     → valor observado / histórico
+ *   lavender → perfiles GMM (probabilidades)
+ *   coral    → errores y diferencias negativas (siempre con icono o texto)
+ * Perfiles GMM: paleta categórica p0–p4 (orden del índice de clúster).
+ * Mapa táctico: rampa secuencial heat-0…heat-5 (escala fija 0–100 %).
+ */
+@theme {
+  /* Superficies */
+  --color-noche: #0d1915;
+  --color-noche-2: #0a1411;
+  --color-panel: #12211b;
+  --color-panel-2: #172a22;
+  --color-panel-3: #1e352b;
+  --color-line: #22392f;
+  --color-line-2: #2f4a3e;
+  --color-line-3: #3c5a4c;
+
+  /* Texto */
+  --color-blanco: #fcfcfa;
+  --color-salvia: #7d948c;
+  --color-salvia-2: #a8b9b2;
+
+  /* Datos */
+  --color-lime: #b7e68f;
+  --color-lime-2: #9fd474;
+  --color-blue: #83b9ce;
+  --color-gold: #e5c383;
+  --color-lavender: #c9a4d3;
+  --color-coral: #ec9a8c;
+
+  /* Perfiles GMM (categórica, índice de clúster) */
+  --color-p0: #83b9ce;
+  --color-p1: #e5c383;
+  --color-p2: #c9a4d3;
+  --color-p3: #8fd3b6;
+  --color-p4: #e9a27c;
+
+  /* Rampa del mapa táctico */
+  --color-heat-0: #13261e;
+  --color-heat-1: #326b39;
+  --color-heat-2: #87b43a;
+  --color-heat-3: #e8d43a;
+  --color-heat-4: #f39132;
+  --color-heat-5: #df3d36;
+
+  --font-display: 'Montserrat Variable', 'Montserrat', 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', 'Menlo', 'Consolas', monospace;
+
+  /* Escala tipográfica (razón ~1.2, base 14 px de interfaz) */
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+
+  /* Radios con jerarquía: control < botón < panel */
+  --radius-ctl: 5px;
+  --radius-btn: 7px;
+  --radius-card: 10px;
+
+  /* Movimiento: firma única + 4 duraciones (ver src/motion/tokens.ts) */
+  --ease-out-soft: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emph: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 1, 1);
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 320ms;
+  --dur-4: 520ms;
+
+  --animate-rise: rise var(--dur-3) var(--ease-emph) both;
+  --animate-fade: fade var(--dur-2) var(--ease-out-soft) both;
+  --animate-pop: pop var(--dur-2) var(--ease-emph) both;
+  --animate-slide-in: slide-in var(--dur-3) var(--ease-emph) both;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: translateY(4px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes slide-in {
+    from {
+      opacity: 0.4;
+      transform: translateX(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes shimmer {
+    from {
+      background-position: -200% 0;
+    }
+    to {
+      background-position: 200% 0;
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background: var(--color-noche);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--color-noche);
+    color: var(--color-blanco);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--color-lime) 35%, transparent);
+    color: var(--color-blanco);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+  select option {
+    background: var(--color-panel);
+    color: var(--color-blanco);
+  }
+  input[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(0.8);
+    cursor: pointer;
+  }
+  input[type='range'] {
+    accent-color: var(--color-lime);
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line-2) transparent;
+  }
+}
+
+@layer components {
+  /* Rótulo de sección: frase corta, sin mayúsculas forzadas. */
+  .kicker {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--color-salvia);
+  }
+  /* Compatibilidad: el antiguo .eyebrow adopta el estilo del kicker. */
+  .eyebrow {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  /* Skeleton con barrido (respeta reduced-motion vía regla global). */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--color-panel-2) 0%,
+      var(--color-panel-3) 40%,
+      var(--color-panel-2) 80%
+    );
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+  }
+
+  /*
+   * Revelado escalonado: los hijos con [data-reveal] aparecen en cascada
+   * cuando su contenedor .reveal-group entra en pantalla (clase .is-in).
+   * --i = índice del elemento; presupuesto total < 400 ms.
+   */
+  .reveal-group [data-reveal] {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity var(--dur-3) var(--ease-out-soft),
+      transform var(--dur-4) var(--ease-emph);
+    transition-delay: calc(min(var(--i, 0), 8) * 45ms);
+  }
+  .reveal-group.is-in [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Colapso animado de alto (divulgación progresiva / modo Avanzado). */
+  .disclose {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows var(--dur-3) var(--ease-out-soft),
+      opacity var(--dur-2) var(--ease-out-soft);
+  }
+  .disclose > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .disclose[data-open='true'] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  /* Microinteracción de pulsación. */
+  .press {
+    transition: transform var(--dur-1) var(--ease-out-soft);
+  }
+  .press:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  /* Trazo SVG que se dibuja (radar, líneas). */
+  .draw {
+    stroke-dasharray: var(--len, 1200);
+    stroke-dashoffset: var(--len, 1200);
+    animation: draw var(--dur-4) var(--ease-out-soft) forwards;
+  }
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Anillo de selección del mapa táctico. */
+  .zone-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: zone-pulse 1.6s var(--ease-out-soft) infinite;
+  }
+  @keyframes zone-pulse {
+    0% {
+      opacity: 0.9;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.08);
+    }
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+  .crisp {
+    shape-rendering: crispEdges;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Transiciones de página (View Transitions API, si existe). */
+::view-transition-old(root) {
+  animation: 140ms var(--ease-exit) both vt-out;
+}
+::view-transition-new(root) {
+  animation: 260ms var(--ease-emph) both vt-in;
+}
+@keyframes vt-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+/* La barra lateral y la cabecera no participan en el fundido. */
+/* Nombres únicos: un nombre repetido abortaría la transición. */
+.vt-aside {
+  view-transition-name: chrome-aside;
+}
+.vt-header {
+  view-transition-name: chrome-header;
+}
+::view-transition-old(chrome-aside),
+::view-transition-new(chrome-aside),
+::view-transition-old(chrome-header),
+::view-transition-new(chrome-header) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-group [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* v0.3 · OFFBALL diamond language / motion deck. */
+.ob-kicker{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.13em;color:var(--color-lime);text-transform:uppercase}
+.ob-deck-panel{position:relative;background:linear-gradient(145deg,#172a22,#0d1915 65%);border:1px solid #2f4a3e;border-radius:4px;overflow:hidden}
+.ob-deck-panel::before{content:'';position:absolute;top:0;right:0;width:22px;height:22px;background:#b7e68f;clip-path:polygon(100% 0,100% 100%,0 0);pointer-events:none}
+.ob-shortcut{transition:transform .2s,border-color .2s;min-height:145px}.ob-shortcut:hover{transform:translateY(-3px);border-color:#b7e68f}
+.ob-stat{border:1px solid #2f4a3e;background:#12211b;padding:16px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%)}.ob-stat>p:first-child{color:#a8b9b2;font-size:.8rem}.ob-stat>strong{display:block;font:600 1.7rem var(--font-mono);color:#b7e68f}
+.ob-input{background:#0a1411;border:1px solid #3c5a4c;padding:9px 12px;border-radius:5px;color:#fcfcfa;font-size:.82rem;min-width:0}.ob-input:focus{outline:2px solid #b7e68f;outline-offset:1px}
+.ob-table{width:100%;border-collapse:collapse;font-size:.82rem;text-align:left}.ob-table td,.ob-table th{padding:10px 12px;border-bottom:1px solid #22392f;white-space:nowrap}.ob-table th{color:#a8b9b2;font-weight:600}.ob-table tr:hover td{background:#172a22}
+.ob-upload{position:relative;display:flex;align-items:center;gap:8px;padding:12px;border:1px dashed #7d948c;color:#b7e68f;cursor:pointer;max-width:100%;overflow:hidden}.ob-upload input{max-width:220px;color:#a8b9b2;font-size:.8rem}.ob-upload input::file-selector-button{background:#22392f;border:none;color:white;padding:5px 8px}
+.ob-slide{animation:ob-reveal .38s cubic-bezier(.2,.8,.2,1) both;min-height:260px}.ob-slide [hidden]{display:none!important}
+.ob-intro{min-height:100dvh;display:flex;align-items:center;position:relative;background:radial-gradient(ellipse at 75% 40%,#203e2f,#0a1411 64%);overflow:hidden;padding:clamp(24px,8vw,130px)}
+.ob-intro-body{position:relative;z-index:1;max-width:720px}.ob-intro-copy{animation:ob-reveal .55s both;margin:clamp(38px,9vh,100px) 0 32px}.ob-intro-copy h1{font-family:var(--font-display);font-size:clamp(2.6rem,6.1vw,6.1rem);line-height:1.04;font-weight:800;letter-spacing:-.055em;margin:12px 0 22px;max-width:13ch;color:#fcfcfa}.ob-intro-copy>p:last-child{font-size:clamp(.95rem,1.5vw,1.2rem);line-height:1.6;max-width:45ch;color:#a8b9b2}
+.ob-intro-art{position:absolute;right:-14vw;top:50%;width:65vw;height:65vw;transform:translateY(-50%) rotate(45deg);pointer-events:none;opacity:.65}.ob-intro-art>div{position:absolute;inset:0;border:clamp(2px,1vw,12px) solid #b7e68f;animation:ob-diamond .9s both}.ob-intro-art>div:nth-child(2){inset:13%;border-color:#5d8a57;animation-delay:.1s}.ob-intro-art>div:nth-child(3){inset:26%;background:repeating-linear-gradient(90deg,transparent 0 32px,#b7e68f22 32px 34px);border-color:#9fd474;animation-delay:.2s}
+.ob-primary,.ob-secondary{padding:14px 22px;font-weight:700;font-size:.88rem;cursor:pointer;transition:background .2s,transform .2s}.ob-primary{background:#b7e68f;color:#0d1915;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}.ob-secondary{border:1px solid #7d948c;color:#fcfcfa}.ob-primary:hover,.ob-secondary:hover{transform:translateY(-2px);background:#8fc86c;color:#0d1915}.ob-dot{width:12px;height:12px;border:1px solid #b7e68f;transform:rotate(45deg);cursor:pointer}.ob-dot.active{background:#b7e68f}
+@keyframes ob-reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}@keyframes ob-diamond{from{opacity:0;scale:.75}to{opacity:1;scale:1}}
+@media(max-width:640px){.ob-intro-art{opacity:.22;width:110vw;height:110vw;right:-55vw}}
+@media(prefers-reduced-motion:reduce){.ob-intro-copy,.ob-intro-art>div,.ob-slide{animation:none}.ob-shortcut,.ob-primary,.ob-secondary{transition:none}}
+
+/* 0.4.2: presentación reproducible y fichas de scouting */
+.ob-intro-logo{animation:ob-logo-in .9s cubic-bezier(.2,.8,.2,1) both}
+.ob-intro-copy{animation:ob-slide-in .7s cubic-bezier(.18,.8,.22,1) both}
+.ob-intro-side{position:absolute;right:5vw;bottom:8vh;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:.5rem;max-width:34vw;z-index:1;color:#b7e68f;animation:ob-slide-in .8s both;font:500 .75rem var(--font-mono);letter-spacing:.08em}.ob-intro-side strong{font:800 clamp(1.4rem,3.4vw,4rem) var(--font-display);letter-spacing:-.04em;color:#fcfcfa}.ob-intro-1{background:radial-gradient(ellipse at 75% 40%,#263e29,#0a1411 64%)}.ob-intro-2{background:radial-gradient(ellipse at 75% 40%,#27463d,#0a1411 64%)}
+.ob-intro-progress{height:2px;background:#39594a;width:min(240px,100%);margin-top:20px}.ob-intro-progress span{display:block;height:100%;background:#b7e68f;transform-origin:left;animation:ob-progress 6.5s linear both}
+@keyframes ob-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes ob-logo-in{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}@keyframes ob-slide-in{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+.ob-detail-nav{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid #2f4a3e;padding-bottom:14px}.ob-detail-nav button{font-size:.83rem;padding:9px 14px;color:#a8b9b2;background:#12211b;border:1px solid #2f4a3e;cursor:pointer;transition:background .2s,color .2s,border-color .2s}.ob-detail-nav button.active{border-color:#b7e68f;color:#b7e68f;background:#203c2e}.ob-detail-index{font-family:var(--font-mono);font-size:.72rem;margin-right:7px}.ob-detail-nav button:hover{color:#fcfcfa;border-color:#b7e68f}
+@media(max-width:950px){.ob-intro-side{display:none}}@media(prefers-reduced-motion:reduce){.ob-intro-copy,.ob-intro-logo,.ob-intro-side,.ob-intro-progress span{animation:none}.ob-detail-nav button{transition:none}}

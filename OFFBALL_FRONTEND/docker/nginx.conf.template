@@ -1,0 +1,39 @@
+# Plantilla procesada por envsubst (imagen oficial de nginx): ${OFFBALL_API_UPSTREAM}
+server {
+  listen 80;
+  server_name _;
+  root /usr/share/nginx/html;
+  index index.html;
+
+  # Cabeceras de seguridad básicas
+  add_header X-Content-Type-Options nosniff always;
+  add_header Referrer-Policy strict-origin-when-cross-origin always;
+  add_header X-Frame-Options DENY always;
+
+  # Proxy mismo origen hacia OFFBALL API (sin CORS en el navegador)
+  location /api/ {
+    proxy_pass ${OFFBALL_API_UPSTREAM};
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_read_timeout 300s;
+    client_max_body_size 32m;
+    limit_except GET POST { deny all; }
+  }
+  location = /health {
+    proxy_pass ${OFFBALL_API_UPSTREAM};
+    proxy_set_header Host $host;
+  }
+
+  # Recursos con hash: caché larga
+  location /assets/ {
+    expires 1y;
+    add_header Cache-Control "public, immutable";
+    try_files $uri =404;
+  }
+
+  # SPA: cualquier otra ruta devuelve index.html
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}

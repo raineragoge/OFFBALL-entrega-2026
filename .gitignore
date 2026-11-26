@@ -1,4 +1,4 @@
-# Entornos, dependencias y secretos
+# Dependencias, entornos, bases de datos y secretos
 **/.venv/
 **/__pycache__/
 **/.pytest_cache/
@@ -14,7 +14,7 @@
 *.parquet
 *.log
 mlruns/
-# Recursos reservados
+# Material académico local y recursos con permisos de redistribución pendientes
 /entrega_local/
 /OFFBALL_API/assets/*
 !/OFFBALL_API/assets/README.md

@@ -1,0 +1,10 @@
+{
+  "G01_general_directo.joblib": "a0af9d28555b0486d98d90e7a45d3311202a87b4b3d15d8ab0d0874148076946",
+  "G02_general_log.joblib": "99ef9c207f8f92649ceaccce1d8f27448d5ee7396b603ce63cf244505573c4e8",
+  "OFFBALL_clustering_EXTENDIDO_K5.joblib": "02b9dbf7a771ce749a5cbc833d6a4e3fa8d9f2bb18df15b8b6fe1bf081929017",
+  "calibracion_anomalias.csv": "e0cf2b2143bd42339fff508bd6c87bb3234003a59639559d2be95361441714cd",
+  "catalogo_historico.parquet": "5d0ec8219e10f4b73ca47bb35696e4d881c188dc97d0c4941e4a2fc520d5ec9b",
+  "configuracion.json": "083c4a61a9a32ade66f2510774880b49ae3ad84131291af31f2305a1803c6aa1",
+  "metricas_test.csv": "ca882ff271882546811fdafd8a7128e16bd6206ba6f5ed922d8c4268b8cf8d87",
+  "perfiles_K5.csv": "b4fc6471d00dc0218110556658f9d79943500f04b144a03a1d1d2b592f1c5907"
+}

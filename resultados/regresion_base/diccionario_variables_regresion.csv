@@ -1,0 +1,17 @@
+Variable,Descripción
+valuation_id,Identificador creado en este notebook para cada valoración
+player_id,Identificador del jugador en la fuente
+valuation_date,Fecha de la valoración de mercado
+valuation_year,Año de la valoración
+age,Edad completa del jugador en la fecha de valoración
+position,Posición general del jugador
+sub_position,Subposición específica del jugador
+competiciones_con_stats,Número de competiciones con estadísticas disponibles
+latest_stats_end,Fecha final de la última temporada utilizada
+partidos,Partidos agregados de las temporadas seleccionadas
+minutos,Minutos agregados de las temporadas seleccionadas
+goles,Goles agregados de las temporadas seleccionadas
+asistencias,Asistencias agregadas de las temporadas seleccionadas
+goles_por90,Goles por 90 calculados sobre los totales agregados
+asistencias_por90,Asistencias por 90 calculadas sobre los totales agregados
+market_value_in_eur,Objetivo: valor de mercado en euros nominales

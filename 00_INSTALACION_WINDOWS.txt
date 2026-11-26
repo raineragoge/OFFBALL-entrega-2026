@@ -1,0 +1,58 @@
+﻿OFFBALL v0.4.2 — INSTALACIÓN EN OTRO ORDENADOR
+Equipo: Carmelo, Igor y Byron | 26/11/2026
+
+1. REQUISITOS
+- Windows 10/11 de 64 bits compatible con Docker Desktop y virtualización habilitada.
+- Docker Desktop con motor de contenedores Linux y Docker Compose v2.
+  Descarga oficial: https://www.docker.com/products/docker-desktop/
+- Conexión a Internet durante la primera construcción (imágenes y dependencias).
+- Navegador web. No necesitas instalar Python, Node.js, MongoDB ni entrenar modelos.
+
+2. PRIMER ARRANQUE
+- Extrae TODO el ZIP en una carpeta local (no ejecutes dentro del ZIP).
+- Abre Docker Desktop y comprueba que el motor está en marcha.
+- Entra en la carpeta OFFBALL_v0.4.2, donde están compose.yaml e INICIAR_OFFBALL.cmd.
+- Haz doble clic en INICIAR_OFFBALL.cmd. Alternativamente abre PowerShell en esa carpeta:
+    docker compose up -d --build --wait --wait-timeout 180
+- El script construye las imágenes, espera a los servicios y abre el navegador.
+- Dirección: http://localhost:5173
+- Estado: docker compose ps
+- API: http://localhost:5173/health (debe devolver JSON con status ok).
+- Si falla, ejecuta docker compose logs --tail=50 y revisa los errores.
+
+3. PRUEBA DE DEMOSTRACIÓN
+- Inicio: intro animada (o botón Ver intro), selección de modo.
+- Mercado: filtra por posición; pulsa el nombre de un jugador para abrir su ficha.
+- Guarda candidatos y prueba su encaje táctico.
+- Base de jugadores: importa ejemplos/OFFBALL_Mercado_DEMO.csv, valida y confirma.
+  Es un archivo ficticio; no lo confundas con datos reales de scouting.
+- Mi plantilla: carga la plantilla ficticia desde el botón o importa
+  ejemplos/PLANTILLA_CLUB_DEMO.csv. Selecciona 4-2-3-1.
+- Revisa las alertas de puestos débiles y las recomendaciones, y abre el laboratorio táctico.
+
+4. PARAR Y VOLVER A ABRIR
+    docker compose stop
+    docker compose up -d --wait --wait-timeout 180
+No borrar el volumen ni usar docker compose down -v si se quieren conservar las importaciones.
+Si el puerto 5173 está ocupado, identifica primero el contenedor:
+    docker ps --filter "publish=5173"
+Detén únicamente el contenedor anterior de OFFBALL si corresponde y vuelve a ejecutar el arranque.
+
+5. QUÉ SE INCLUYE Y QUÉ NO
+Frontend React/TypeScript, API FastAPI/Pydantic, Docker Compose, dependencias declaradas,
+modelos G01/G02 y GMM K=5 serializados, catálogo histórico Parquet, métricas, documentación,
+pruebas automatizadas y datos ficticios. El código y los modelos son los de v0.4.2 sin cambios.
+Este paquete reproduce la aplicación con los modelos ya entrenados; no es la colección de
+notebooks y datos originales necesarios para repetir el entrenamiento desde cero.
+El primer arranque genera un volumen SQLite en el ordenador receptor. No incluye los datos
+personales de la instalación de otro compañero, ni el estado local de su navegador.
+Para trasladar jugadores propios: exportar JSON desde Mi plantilla y volver a importarlo;
+para datos nuevos de mercado: compartir los CSV/JSON originales y reimportarlos.
+Las alineaciones, preferencias y listas locales no se sincronizan automáticamente.
+
+6. LIMITACIONES Y VERIFICACIÓN
+La integridad del ZIP y de los ocho activos del manifiesto se ha comprobado al empaquetar.
+No se ha ejecutado una instalación limpia de v0.4.2 en otro ordenador. El Dockerfile del
+frontend ejecuta comprobación de tipos, pruebas y compilación durante el arranque inicial.
+La afinidad posicional no equivale a tracking real; las recomendaciones orientan al ojeador.
+Consulta LEEME_PRIMERO.md para los detalles técnicos y las limitaciones de esta versión.
