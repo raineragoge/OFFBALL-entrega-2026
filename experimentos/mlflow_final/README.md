@@ -32,3 +32,16 @@ Resultado observado: HTTP 200, {"predictions":[7170882.919395378]}. La prueba co
 Se compararon los lotes históricos de valoraciones de 2024 y 2025, solo G02, excluyendo 2026 incompleto. PSI para las ocho variables de entrada (umbrales orientativos 0,10 y 0,25), KS para variables numéricas y métricas de error/recall por año. El PSI máximo fue 0,00498 y el MAE aumentó aproximadamente 7,15 %. Esto apoya mantener y monitorizar el modelo, revisar errores por segmento y plantear reentrenamiento si la degradación persiste. No equivale a una segunda ingesta real ni demuestra causalidad.
 
 [Capturas y métricas](../../docs/cierre-2026-11-27/README.md).
+
+## Scripts de importación y registro utilizados
+- [importar_offball.py](importar_offball.py): importar las cuatro bases archivadas en la base histórica local.
+- [registrar_offball.py](registrar_offball.py): prevalidar y registrar GMM K5 y G02 sin volver a entrenar.
+
+Requieren restaurar la estructura local original, con las cuatro carpetas bajo `/offball/experimentos_definitivos/`, los modelos propios de confianza y la base histórica `/offball/runs/verified/mlflow.db`. Copiar ambos scripts a la raíz del directorio montado como `/offball`. Antes de ejecutar, verificar que todos los datos de entrada están autorizados y conservar una copia íntegra del tracking y sus artefactos. No ejecutar simultáneamente otros procesos que escriban en la base.
+
+```powershell
+docker exec offball-mlflow /opt/offball-venv/bin/python /offball/importar_offball.py
+docker exec offball-mlflow /opt/offball-venv/bin/python /offball/registrar_offball.py
+```
+
+En la sesión se registraron las versiones 2 por existir ya una versión 1 histórica; en otra base el número de versión depende de las versiones existentes. El alias es la referencia estable de selección. El importador y el registro no deben usarse como migraciones generales de cualquier esquema SQLite de MLflow.
