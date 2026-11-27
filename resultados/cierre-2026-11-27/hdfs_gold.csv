@@ -1,0 +1,5 @@
+archivo,bytes
+OFFBALL_dataset_analitico_EXTENDIDO.parquet,2600774
+catalogo_historico.parquet,158284
+predicciones_test.parquet,1035130
+predicciones_validacion.parquet,1546306

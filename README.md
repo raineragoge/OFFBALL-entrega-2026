@@ -2,11 +2,11 @@
 
 ![Arquitectura](docs/figuras/arquitectura.png)
 
-**Ver lo que otros no ven.** Proyecto académico de Inteligencia Artificial y Big Data · Cebanc · noviembre de 2026. Equipo: Carmelo José Beato García, Igor y Byron.
+**Ver lo que otros no ven.** Proyecto académico de Inteligencia Artificial y Big Data · Cebanc · noviembre de 2026. Equipo: Carmelo Beato, Igor y Byron.
 
 OFFBALL ayuda a los clubes profesionales con presupuestos ajustados a explorar perfiles deportivos y estimar el valor de mercado de futbolistas. Es una herramienta de apoyo al scouting: una señal económica no acredita una ganga, un precio de traspaso ni la disponibilidad del jugador.
 
-## Versión entregada: v0.4.2
+## Versión entregada: v0.4.2 · cierre técnico del 27/11/2026
 
 - GMM extendido de cinco componentes (14 ligas): perfiles de jugadores ofensivos.
 - G02: Random Forest con objetivo logarítmico, seleccionado por su rendimiento en jugadores económicamente accesibles; G01 se conserva como referencia directa.
@@ -44,6 +44,10 @@ Swagger: <http://127.0.0.1:8000/docs>. El puerto queda enlazado a localhost. Par
 | `resultados/` | Métricas agregadas, comparación de modelos y verificación de datos |
 | `docs/` | Figuras y pruebas con entradas ficticias |
 | `ejemplos/` | Entradas ficticias y plantillas de demostración |
+| `infra/hadoop/` | Configuración HDFS, ingesta, conversión Parquet y consultas Hive |
+| `experimentos/mlflow_final/` | Guía de registro y Serving, trazabilidad y monitorización |
+| `docs/cierre-2026-11-27/` | Evidencias y balance técnico final |
+| `resultados/cierre-2026-11-27/` | Métricas agregadas finales y recuentos verificados |
 | `entrega_local/` | Informe, presentación, evidencias, notebooks ejecutados y material reservado; excluido de Git |
 
 ## Pruebas y evidencias
@@ -60,7 +64,7 @@ En la comprobación local del 26/11/2026 se documentaron 78 pruebas de frontend 
 
 Las dependencias de la API están fijadas en `OFFBALL_API/requirements.txt` (Python 3.11, scikit-learn 1.6.1, PyArrow 19.0.1). El frontend usa `package-lock.json`. El manifiesto SHA-256 permite verificar los ocho artefactos locales sin deserializarlos. Los notebooks conservan el código original y pueden requerir adaptar las rutas de Colab y aportar el dataset autorizado. No están incluidos los notebooks de entrenamiento definitivos K5/G02 si no constaban en los materiales recibidos; sí están los modelos, configuración y resultados disponibles. No se afirma que el reentrenamiento completo se haya reproducido aquí.
 
-MLflow acredita tracking y Model Registry de la fase histórica, no registro de K5/G02. Hay evidencias de análisis KS de drift y errores por año, pero no consta una medición completa sobre un segundo lote nuevo para la versión final. La documentación y comandos de Hadoop disponibles se conservan en el paquete académico; faltan los scripts originales de ingesta y las comprobaciones finales de Igor si no se aportan.
+El 27/11 se importaron 56 ejecuciones archivadas al tracking local, se registraron GMM K5 y G02 como versión 2 con alias `definitivo` y se comprobó MLflow Serving de G02 (HTTP 200). La monitorización histórica compara 2024 frente a 2025; no equivale a una nueva ingesta de producción. Hadoop 3.3.6 y Hive 4.0.0 se verificaron en Docker con volúmenes HDFS persistentes, cinco tablas externas Parquet y MapReduce local. Véanse [cierre técnico y evidencias](docs/cierre-2026-11-27/README.md), [reproducción Hadoop/Hive](infra/hadoop/README.md) y [MLflow](experimentos/mlflow_final/README.md).
 
 ## Datos y acceso
 
@@ -68,4 +72,4 @@ La fuente de datos deportivos es Transfermarkt. La disponibilidad pública de lo
 
 ## Entrega académica
 
-El informe consolidado y presentación se encuentran en `entrega_local/documentacion/` en la copia local. Para el profesor: proporcionar el enlace al repositorio público y, si se dispone de permisos, el material local por el canal de entrega del centro. Las reflexiones individuales, la skill exportada y el vídeo específico de un minuto deben confirmarse/completarse por el equipo.
+La memoria final, las reflexiones individuales, la Skill exportada y los artefactos sujetos a autorización se entregan por el canal del centro. Este repositorio contiene código público, configuración, resultados agregados y evidencias técnicas. El material local no se publica por defecto.
